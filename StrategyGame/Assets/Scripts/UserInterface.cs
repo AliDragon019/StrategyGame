@@ -132,6 +132,7 @@ public class UserInterface : MonoBehaviour
     public void Cancel(){
         ShowObject(actionsPanel);
         HideObject(approvePanel);
+        HideObject(buildPanel);
         HideObject(numberInput);
 
         currentMethod = null;
