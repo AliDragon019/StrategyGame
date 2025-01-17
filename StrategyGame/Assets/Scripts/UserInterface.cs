@@ -14,17 +14,24 @@ public class UserInterface : MonoBehaviour
     public Province currentProvince;
 
     public GameObject actionsPanel;
-    public GameObject infoPanel;
+    public GameObject topPanel;
     public GameObject approvePanel;
+    public GameObject buildPanel;
+    public GameObject infoPanel;
 
     public GameObject numberInput;
 
     public Text money;
     public Text countryName;
+    public Text provinceName;
+    public Text population;
+    public Text economy;
 
     void Awake(){
         ShowObject(actionsPanel);
         ShowObject(approvePanel);
+        ShowObject(buildPanel);
+        ShowObject(infoPanel);
         ShowObject(numberInput);
     }
 
@@ -33,6 +40,8 @@ public class UserInterface : MonoBehaviour
     {
         HideObject(actionsPanel);
         HideObject(approvePanel);
+        HideObject(buildPanel);
+        HideObject(infoPanel);
         HideObject(numberInput);
         
         countryName.text = country.countryName;
@@ -70,16 +79,22 @@ public class UserInterface : MonoBehaviour
 
     public void SelectProvince(Province province){
         ShowObject(actionsPanel);
+        ShowObject(infoPanel);
         HideObject(approvePanel);
+        HideObject(buildPanel);
         HideObject(numberInput);
 
         currentProvince = province;
-        Debug.Log(currentProvince.provinceName);
+        provinceName.text = currentProvince.provinceName;
+        population.text = "Population: " + currentProvince.population.ToString();
+        economy.text = "Economy: " + currentProvince.economy.ToString();
     }
 
     public void SelectBackground(){
         HideObject(actionsPanel);
+        HideObject(infoPanel);
         HideObject(approvePanel);
+        HideObject(buildPanel);
         HideObject(numberInput);
 
         currentProvince = null;
@@ -88,28 +103,39 @@ public class UserInterface : MonoBehaviour
     public void Approve(){
         ShowObject(actionsPanel);
         HideObject(approvePanel);
+        HideObject(buildPanel);
         HideObject(numberInput);
 
-        int number = int.Parse(numberInput.GetComponent<InputField>().text);
         switch (currentMethod){
             case "recruit":
+            int number = int.Parse(numberInput.GetComponent<InputField>().text);
             country.money -= number;
             currentProvince.army += number;
             break;
 
             case "disband":
-            country.money += number;
-            currentProvince.army -= number;
+            int num = int.Parse(numberInput.GetComponent<InputField>().text);
+            country.money += num;
+            currentProvince.army -= num;
+            break;
+
+            case "build":
+
             break;
             
             default: break;
         }
+
+        currentMethod = null;
     }
 
     public void Cancel(){
         ShowObject(actionsPanel);
         HideObject(approvePanel);
+        HideObject(buildPanel);
         HideObject(numberInput);
+
+        currentMethod = null;
     }
 
     public void Move(){
@@ -144,6 +170,8 @@ public class UserInterface : MonoBehaviour
     }
     
     public void Build(){
-
+        HideObject(actionsPanel);
+        ShowObject(approvePanel);
+        ShowObject(buildPanel);
     }
 }
