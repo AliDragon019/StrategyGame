@@ -24,6 +24,7 @@ public class UserInterface : MonoBehaviour
     public Text money;
     public Text countryName;
     public Text provinceName;
+    public Text army;
     public Text population;
     public Text economy;
 
@@ -51,6 +52,13 @@ public class UserInterface : MonoBehaviour
     void Update()
     {
         money.text = "Money: " + country.money;
+
+        if(currentProvince != null){
+            provinceName.text = currentProvince.provinceName;
+            army.text = "Army: " + currentProvince.army.ToString();
+            population.text = "Population: " + currentProvince.population.ToString();
+            economy.text = "Economy: " + currentProvince.economy.ToString();
+        }
     }
 
     public void ShowObject(GameObject obj){
@@ -85,9 +93,6 @@ public class UserInterface : MonoBehaviour
         HideObject(numberInput);
 
         currentProvince = province;
-        provinceName.text = currentProvince.provinceName;
-        population.text = "Population: " + currentProvince.population.ToString();
-        economy.text = "Economy: " + currentProvince.economy.ToString();
     }
 
     public void SelectBackground(){
