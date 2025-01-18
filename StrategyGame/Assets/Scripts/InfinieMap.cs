@@ -6,25 +6,26 @@ public class InfinieMap : MonoBehaviour
 {
     public GameObject camera;
     Vector3 startPosition;
-    float repeatWidth ;
-
+    Vector3 rightPosition;
+    Vector3 LeftPosition;
 
     // Start is called before the first frame update
     void Start()
     {
         startPosition = camera.transform.position;
-        repeatWidth = gameObject.GetComponent<BoxCollider2D>().size.x /3;
-     
+        rightPosition = startPosition + 100 * Vector3.right;
+        LeftPosition = startPosition + 100 * Vector3.left;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(camera.transform.position.x < startPosition.x - repeatWidth){
-            camera.transform.position = startPosition;
+        if(camera.transform.position.x < startPosition.x - 100){
+            camera.transform.position = rightPosition;
         }
-        else if (camera.transform.position.x > startPosition.x + repeatWidth){
-            camera.transform.position = startPosition;
+        else if (camera.transform.position.x > startPosition.x + 100){
+            camera.transform.position = LeftPosition ;
         }
       
     }
