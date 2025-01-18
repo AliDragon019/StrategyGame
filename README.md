@@ -1,4 +1,5 @@
 <b>To-Do:</b><br>
-Move Fuction<br>
+Show army on province <br>
+Move Function<br>
 Camera Movement<br>
 Attacking System<br>
