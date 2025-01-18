@@ -842,7 +842,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20751d6b243d07b489532c5b0500c5ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 200
 --- !u!1 &549439003
 GameObject:
   m_ObjectHideFlags: 0
@@ -3151,7 +3151,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6821042278281192647, guid: 57bb9182f53c04d468156366a1b54edc, type: 3}
       propertyPath: provinceName
-      value: Al-Markaz
+      value: Al-Qarah
       objectReference: {fileID: 0}
     - target: {fileID: 6933454626447536176, guid: 57bb9182f53c04d468156366a1b54edc, type: 3}
       propertyPath: m_Name
