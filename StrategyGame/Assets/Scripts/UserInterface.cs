@@ -12,12 +12,14 @@ public class UserInterface : MonoBehaviour
 
     public Country country;
     public Province currentProvince;
+    public Province secondProvince;
 
     public GameObject actionsPanel;
     public GameObject topPanel;
     public GameObject approvePanel;
     public GameObject buildPanel;
     public GameObject infoPanel;
+    public GameObject secondInfoPanel;
 
     public GameObject numberInput;
 
@@ -25,16 +27,27 @@ public class UserInterface : MonoBehaviour
 
     public Text money;
     public Text countryName;
+    
+    #region Selected Province Resources
     public Text provinceName;
     public Text army;
     public Text population;
     public Text economy;
+    #endregion
+    #region Second Province Resources
+    public Text secondProvinceName;
+    public Text secondArmy;
+    public Text secondPopulation;
+    public Text secondEconomy;
+    #endregion
+
 
     void Awake(){
         ShowObject(actionsPanel);
         ShowObject(approvePanel);
         ShowObject(buildPanel);
         ShowObject(infoPanel);
+        ShowObject(secondInfoPanel);
         ShowObject(numberInput);
     }
 
@@ -45,6 +58,7 @@ public class UserInterface : MonoBehaviour
         HideObject(approvePanel);
         HideObject(buildPanel);
         HideObject(infoPanel);
+        HideObject(secondInfoPanel);
         HideObject(numberInput);
         
         countryName.text = country.countryName;
@@ -60,6 +74,13 @@ public class UserInterface : MonoBehaviour
             army.text = "Army: " + currentProvince.army.ToString();
             population.text = "Population: " + currentProvince.population.ToString();
             economy.text = "Economy: " + currentProvince.economy.ToString();
+            
+            if(secondProvince != null){
+                secondProvinceName.text = secondProvince.provinceName;
+                secondArmy.text = secondProvince.army.ToString();
+                secondPopulation.text = secondProvince.population.ToString();
+                secondEconomy.text = secondProvince.economy.ToString();
+            }
         }
     }
 
@@ -84,7 +105,7 @@ public class UserInterface : MonoBehaviour
             input.text = minNumber.ToString();
         }
 
-        approve.interactable = true;
+        if(currentMethod != "move") approve.interactable = true;
     }
 
     #endregion
@@ -92,21 +113,35 @@ public class UserInterface : MonoBehaviour
     public void SelectProvince(Province province){
         ShowObject(actionsPanel);
         ShowObject(infoPanel);
-        HideObject(approvePanel);
         HideObject(buildPanel);
-        HideObject(numberInput);
+        
+        switch(currentMethod){
+            case "move":
+                secondProvince = province;
+                approve.interactable = true;
+            break;
 
-        currentProvince = province;
+            default:
+                HideObject(numberInput);
+                HideObject(approvePanel);
+                
+                currentProvince = province;
+                secondProvince = null;
+            break;
+        }
     }
 
     public void SelectBackground(){
         HideObject(actionsPanel);
         HideObject(infoPanel);
+        HideObject(secondInfoPanel);
         HideObject(approvePanel);
         HideObject(buildPanel);
         HideObject(numberInput);
 
+        currentMethod = null;
         currentProvince = null;
+        secondProvince = null;
         approve.interactable = false;
     }
 
@@ -115,18 +150,23 @@ public class UserInterface : MonoBehaviour
         HideObject(approvePanel);
         HideObject(buildPanel);
         HideObject(numberInput);
+        HideObject(secondInfoPanel);
 
+        int numberInputted = int.Parse(numberInput.GetComponent<InputField>().text);
         switch (currentMethod){
+            case "move":
+            currentProvince.army -= numberInputted;
+            secondProvince.army += numberInputted;
+            break;
+
             case "recruit":
-            int number = int.Parse(numberInput.GetComponent<InputField>().text);
-            country.money -= number;
-            currentProvince.army += number;
+            country.money -= numberInputted;
+            currentProvince.army += numberInputted;
             break;
 
             case "disband":
-            int num = int.Parse(numberInput.GetComponent<InputField>().text);
-            country.money += num;
-            currentProvince.army -= num;
+            country.money += numberInputted;
+            currentProvince.army -= numberInputted;
             break;
 
             case "build":
@@ -137,6 +177,7 @@ public class UserInterface : MonoBehaviour
         }
 
         currentMethod = null;
+        secondProvince = null;
         approve.interactable = false;
     }
 
@@ -145,17 +186,26 @@ public class UserInterface : MonoBehaviour
         HideObject(approvePanel);
         HideObject(buildPanel);
         HideObject(numberInput);
+        HideObject(secondInfoPanel);
 
         currentMethod = null;
+        secondProvince = null;
         approve.interactable = false;
     }
 
     public void Move(){
         HideObject(actionsPanel);
         ShowObject(approvePanel);
+        ShowObject(numberInput);
+        ShowObject(secondInfoPanel);
 
         approve.interactable = false;
+        currentMethod = "move";
+        minNumber = 0;
+        maxNumber = currentProvince.army;
+
         
+        numberInput.GetComponent<InputField>().text = minNumber.ToString();
     }
 
     public void Recruit(){
@@ -167,7 +217,6 @@ public class UserInterface : MonoBehaviour
         minNumber = 0;
         maxNumber = country.money;
         
-        approve.interactable = false;
         numberInput.GetComponent<InputField>().text = minNumber.ToString();
         numberInput.GetComponent<InputField>().Select();
     }
@@ -181,7 +230,6 @@ public class UserInterface : MonoBehaviour
         minNumber = 0;
         maxNumber = currentProvince.army;
         
-        approve.interactable = false;
         numberInput.GetComponent<InputField>().text = minNumber.ToString();
         numberInput.GetComponent<InputField>().Select();
     }

@@ -7,18 +7,19 @@ public class CameraMovement : MonoBehaviour
 
     public float speed;
     public float speedMultiplier;
-    float currentSpeedMultiplier; 
+    float currentSpeedMultiplier;
 
-    Vector3 startPosition;
-    Vector3 rightPosition;
-    Vector3 leftPosition;
+    public RectTransform map;
+
+    public Vector2 cameraSize;
+    public Vector2 mapSize;
+
+    Camera mainCamera;
 
     // Start is called before the first frame update
     void Start()
     {
-        startPosition = transform.position;
-        rightPosition = startPosition + 100 * Vector3.right;
-        leftPosition = startPosition + 100 * Vector3.left;
+        mainCamera = GetComponent<Camera>();
 
         currentSpeedMultiplier = speedMultiplier;
     }
@@ -26,6 +27,9 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        cameraSize = new Vector2(mainCamera.orthographicSize * mainCamera.aspect, mainCamera.orthographicSize);
+        mapSize = map.sizeDelta;
+
         #region Movement
 
         if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
@@ -50,11 +54,19 @@ public class CameraMovement : MonoBehaviour
         #endregion
         
         #region InfiniteLoop
-        if(transform.position.x < startPosition.x - 100){
-            transform.position = rightPosition;
+        float rightBorder = mapSize.x/2;
+        if(transform.position.x < -rightBorder){
+            transform.position = new Vector3(rightBorder, transform.position.y, transform.position.z);
         }
-        else if (transform.position.x > startPosition.x + 100){
-            transform.position = leftPosition ;
+        else if (transform.position.x > rightBorder){
+            transform.position = new Vector3(-rightBorder, transform.position.y, transform.position.z);
+        }
+        
+        float upBorder = mapSize.y/2 - cameraSize.y;
+        if(transform.position.y > upBorder){
+            transform.position = new Vector3(transform.position.x, +upBorder, transform.position.z);
+        } else if(transform.position.y < -upBorder){
+            transform.position = new Vector3(transform.position.x, -upBorder, transform.position.z);
         }
         #endregion
     }
