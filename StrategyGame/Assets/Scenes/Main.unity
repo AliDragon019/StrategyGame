@@ -313,7 +313,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 215561705}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2106886710}
+        m_TargetAssemblyTypeName: UserInterface, Assembly-CSharp
+        m_MethodName: Fortress
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &215561705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -515,7 +527,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 364931133}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2106886710}
+        m_TargetAssemblyTypeName: UserInterface, Assembly-CSharp
+        m_MethodName: Tower
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &364931133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1659,11 +1683,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6933454626447536191, guid: 57bb9182f53c04d468156366a1b54edc, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 3
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6933454626447536191, guid: 57bb9182f53c04d468156366a1b54edc, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 3
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6933454626447536191, guid: 57bb9182f53c04d468156366a1b54edc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2321,7 +2345,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1163287724}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2106886710}
+        m_TargetAssemblyTypeName: UserInterface, Assembly-CSharp
+        m_MethodName: Port
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1163287724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2787,7 +2823,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1409943137}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2106886710}
+        m_TargetAssemblyTypeName: UserInterface, Assembly-CSharp
+        m_MethodName: Move
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1409943137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3941,6 +3989,7 @@ MonoBehaviour:
   buildPanel: {fileID: 1384686968}
   infoPanel: {fileID: 179346954}
   numberInput: {fileID: 750891139}
+  approve: {fileID: 2108271757}
   money: {fileID: 1371020432}
   countryName: {fileID: 281866435}
   provinceName: {fileID: 660927637}
@@ -4158,11 +4207,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6933454626447536191, guid: 57bb9182f53c04d468156366a1b54edc, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6933454626447536191, guid: 57bb9182f53c04d468156366a1b54edc, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6933454626447536191, guid: 57bb9182f53c04d468156366a1b54edc, type: 3}
       propertyPath: m_LocalPosition.x

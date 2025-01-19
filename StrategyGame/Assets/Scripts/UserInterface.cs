@@ -21,6 +21,8 @@ public class UserInterface : MonoBehaviour
 
     public GameObject numberInput;
 
+    public Button approve;
+
     public Text money;
     public Text countryName;
     public Text provinceName;
@@ -81,6 +83,8 @@ public class UserInterface : MonoBehaviour
         } else if(number < minNumber){
             input.text = minNumber.ToString();
         }
+
+        approve.interactable = true;
     }
 
     #endregion
@@ -103,6 +107,7 @@ public class UserInterface : MonoBehaviour
         HideObject(numberInput);
 
         currentProvince = null;
+        approve.interactable = false;
     }
 
     public void Approve(){
@@ -132,6 +137,7 @@ public class UserInterface : MonoBehaviour
         }
 
         currentMethod = null;
+        approve.interactable = false;
     }
 
     public void Cancel(){
@@ -141,10 +147,15 @@ public class UserInterface : MonoBehaviour
         HideObject(numberInput);
 
         currentMethod = null;
+        approve.interactable = false;
     }
 
     public void Move(){
+        HideObject(actionsPanel);
+        ShowObject(approvePanel);
 
+        approve.interactable = false;
+        
     }
 
     public void Recruit(){
@@ -156,7 +167,7 @@ public class UserInterface : MonoBehaviour
         minNumber = 0;
         maxNumber = country.money;
         
-
+        approve.interactable = false;
         numberInput.GetComponent<InputField>().text = minNumber.ToString();
         numberInput.GetComponent<InputField>().Select();
     }
@@ -170,6 +181,7 @@ public class UserInterface : MonoBehaviour
         minNumber = 0;
         maxNumber = currentProvince.army;
         
+        approve.interactable = false;
         numberInput.GetComponent<InputField>().text = minNumber.ToString();
         numberInput.GetComponent<InputField>().Select();
     }
@@ -178,5 +190,25 @@ public class UserInterface : MonoBehaviour
         HideObject(actionsPanel);
         ShowObject(approvePanel);
         ShowObject(buildPanel);
+
+        approve.interactable = false;
+    }
+
+    public void Fortress(){
+        
+        
+        approve.interactable = true;
+    }
+    
+    public void Tower(){
+        
+        
+        approve.interactable = true;
+    }
+    
+    public void Port(){
+        
+        
+        approve.interactable = true;
     }
 }
