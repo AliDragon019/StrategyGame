@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InfinieMap : MonoBehaviour
 {
-    public GameObject camera;
+    public GameObject cam;
     Vector3 startPosition;
     Vector3 rightPosition;
     Vector3 LeftPosition;
@@ -12,7 +12,7 @@ public class InfinieMap : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startPosition = camera.transform.position;
+        startPosition = cam.transform.position;
         rightPosition = startPosition + 100 * Vector3.right;
         LeftPosition = startPosition + 100 * Vector3.left;
 
@@ -21,11 +21,11 @@ public class InfinieMap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(camera.transform.position.x < startPosition.x - 100){
-            camera.transform.position = rightPosition;
+        if(cam.transform.position.x < startPosition.x - 100){
+            cam.transform.position = rightPosition;
         }
-        else if (camera.transform.position.x > startPosition.x + 100){
-            camera.transform.position = LeftPosition ;
+        else if (cam.transform.position.x > startPosition.x + 100){
+            cam.transform.position = LeftPosition ;
         }
       
     }
