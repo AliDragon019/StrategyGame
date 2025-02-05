@@ -8,6 +8,7 @@ public class CameraMovement : MonoBehaviour
     public float speed;
     public float speedMultiplier;
     float currentSpeedMultiplier;
+    public float Zoom;
 
     public RectTransform map;
 
@@ -15,6 +16,12 @@ public class CameraMovement : MonoBehaviour
     public Vector2 mapSize;
 
     Camera mainCamera;
+    
+    private float ZoomTarget;
+
+    [SerializeField]
+    private float zoommMultiplier = 2f, minZoom = 1f, maxZoom = 10f, smmothTime = .1f;
+    private float velocity = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +29,7 @@ public class CameraMovement : MonoBehaviour
         mainCamera = GetComponent<Camera>();
 
         currentSpeedMultiplier = speedMultiplier;
+        zoommMultiplier = mainCamera.orthographicSize;            
     }
 
     // Update is called once per frame
@@ -69,5 +77,15 @@ public class CameraMovement : MonoBehaviour
             transform.position = new Vector3(transform.position.x, -upBorder, transform.position.z);
         }
         #endregion
+
+        #region Zoom
+
+        ZoomTarget -= Input.GetAxisRaw("Mouse ScrollWheel") * zoommMultiplier;
+        ZoomTarget = Mathf.Clamp(ZoomTarget, minZoom, maxZoom);
+        mainCamera.orthographicSize = Mathf.SmoothDamp(mainCamera.orthographicSize, ZoomTarget,ref velocity, smmothTime);
+
+        #endregion
     }
+
+
 }
